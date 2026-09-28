@@ -16,6 +16,10 @@ use App\Controllers\SearchController;
 use App\Controllers\SettingsController;
 use App\Controllers\StaffController;
 use App\Controllers\WorkController;
+use App\Controllers\HealthController;
+
+/** @var \App\Core\Router $router */
+$router->get('/health', [HealthController::class, 'show']);
 
 $router->get('/', static fn() => redirect('login'));
 $router->get('/login', [AuthController::class,'login'], ['guest']);
