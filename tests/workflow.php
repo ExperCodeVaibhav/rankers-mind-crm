@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+require __DIR__ . '/require-test-env.php';
+
 require dirname(__DIR__) . '/app/bootstrap.php';
 
 use App\Config\Config;
@@ -44,7 +46,7 @@ final class WorkflowHttp
 
 try {
     $staffEmail = "acceptance.staff.{$suffix}@rankersmind.local";
-    $staffPassword = 'Workflow@12345';
+    $staffPassword = bin2hex(random_bytes(16));
     $db->beginTransaction();
     $db->prepare("INSERT INTO users(branch_id,name,email,phone,password,user_type,status,must_change_password,created_by) VALUES((SELECT id FROM branches ORDER BY id LIMIT 1),?,?,?,?, 'staff','active',0,?)")
         ->execute(['Acceptance Staff '.$suffix,$staffEmail,'+91'.$suffix,password_hash($staffPassword,PASSWORD_DEFAULT),$adminId]);
@@ -59,7 +61,7 @@ try {
     $staffHttp = new WorkflowHttp((string)Config::get('app.url'));
     workflowCheck($staffHttp->login($staffEmail,$staffPassword)===302,'New staff can sign in');
     $adminHttp = new WorkflowHttp((string)Config::get('app.url'));$adminHttp->login('admin@rankersmind.local','Admin@12345');
-    $portalEmail="acceptance.portal.{$suffix}@rankersmind.local";$portalPassword='ClientPortal@12345';
+    $portalEmail="acceptance.portal.{$suffix}@rankersmind.local";$portalPassword=bin2hex(random_bytes(16));
     $projectManagerId=(int)$db->query("SELECT id FROM users WHERE email='pm@rankersmind.local'")->fetchColumn();
     $clientCreate=$adminHttp->post('/clients',['company_name'=>'Acceptance Portal Company '.$suffix,'primary_contact'=>'Acceptance Client '.$suffix,'phone'=>'+9177'.$suffix,'email'=>$portalEmail,'country'=>'India','status'=>'active','project_manager_id'=>$projectManagerId,'support_staff_id'=>$created['user'],'payment_terms'=>30,'credit_limit'=>0,'portal_enabled'=>1,'portal_login_email'=>$portalEmail,'portal_password'=>$portalPassword,'portal_password_confirmation'=>$portalPassword,'portal_account_status'=>'active']);
     $portalLink=$db->prepare('SELECT c.id client_id,c.portal_user_id,u.password FROM clients c JOIN users u ON u.id=c.portal_user_id WHERE c.email=? AND c.deleted_at IS NULL');$portalLink->execute([$portalEmail]);$portalLink=$portalLink->fetch();$created['portal_client']=(int)($portalLink['client_id']??0);$created['portal_user']=(int)($portalLink['portal_user_id']??0);

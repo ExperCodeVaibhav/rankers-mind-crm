@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+require __DIR__ . '/require-test-env.php';
+
 require dirname(__DIR__) . '/app/bootstrap.php';
 
 use App\Config\Config;
@@ -79,7 +81,7 @@ function leaveAuthorizationCheck(bool $condition, string $label): void
 
 $db = Database::connection();
 $suffix = date('His').random_int(100, 999);
-$password = 'LeaveAuth@12345';
+$password = bin2hex(random_bytes(16));
 $staffEmail = "leave.staff.{$suffix}@rankersmind.local";
 $hrEmail = "leave.hr.{$suffix}@rankersmind.local";
 $staffUserId = 0;

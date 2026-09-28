@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+require __DIR__ . '/require-test-env.php';
+
 require dirname(__DIR__) . '/app/bootstrap.php';
 
 use App\Core\Database;

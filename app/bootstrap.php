@@ -53,6 +53,10 @@ set_exception_handler(static function (Throwable $exception): void {
         ? error_log($message, 3, $logFile)
         : false;
     if (!$written) error_log($message);
+    if (PHP_SAPI === 'cli') {
+        fwrite(STDERR, $message);
+        exit(1);
+    }
     http_response_code(500);
     if (\App\Config\Config::get('app.debug', false)) {
         echo '<pre style="padding:24px;white-space:pre-wrap">' . htmlspecialchars($message, ENT_QUOTES) . '</pre>';
