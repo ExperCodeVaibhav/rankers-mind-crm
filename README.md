@@ -8,6 +8,8 @@ The project uses a custom PHP MVC architecture, PDO prepared statements and Mari
 
 Start with [architecture](docs/architecture.md), [testing](docs/testing.md),
 [contributing](CONTRIBUTING.md), [security](SECURITY.md) and [change history](CHANGELOG.md).
+The [quality report](docs/quality-report.md) records the external score, actual CI
+results and the scorer's PHP/GitHub Actions detection limitations.
 The source remains proprietary as declared in `composer.json`; publication does not change its license.
 
 ## Docker setup
@@ -325,7 +327,7 @@ The original 1080 x 1920 PNG is preserved. Its centred 210 x 100 logo region is 
 
 ## Known deployment dependencies
 
-- The official logo must be supplied separately as described above.
+- The bundled logo can be replaced at `public/assets/images/rankers-mind-logo.png`.
 - SMTP and WhatsApp delivery require real provider credentials; the in-app notification system works without them.
 - Chart.js, FullCalendar, Font Awesome and Inter currently load from established CDNs. Self-host them before deploying to an offline or strict-CSP environment. Bootstrap is already self-hosted.
 - Browser notifications still require the user to grant permission; in-app due/overdue reminders remain available regardless.

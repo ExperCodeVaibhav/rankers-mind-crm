@@ -1,0 +1,356 @@
+{
+  "repo_name": "baseline-repo",
+  "repo_path": "<clean-clone>",
+  "total_loc": 5824,
+  "is_monorepo": false,
+  "classes": [
+    {
+      "name": "data_engineering",
+      "confidence": 1.0,
+      "size_loc": null,
+      "applicable_dimensions": [
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "H",
+        "I",
+        "K",
+        "N"
+      ],
+      "dimension_scores": {
+        "D": 33.2,
+        "N": 30.0,
+        "F": 58.0,
+        "B": 0.0,
+        "C": 51.6,
+        "E": 75.0,
+        "H": 0.0,
+        "I": 8.0,
+        "K": 58.0
+      },
+      "class_score": 34.4,
+      "grade": "F"
+    }
+  ],
+  "warnings": [],
+  "monorepo_bonus": 0.0,
+  "overall_score": 34.4,
+  "overall_grade": "F",
+  "capacity": 0.0,
+  "capacity_basis": "mineable_commits_extrapolated",
+  "capacity_detail": {
+    "confirmed_candidate_count": 0.0,
+    "analyzed_commits": 1,
+    "total_commits": 1,
+    "candidate_rate": 0.0
+  },
+  "mining_rank": 0.0,
+  "auto_score_dimension_evidence": {
+    "B": "no test framework detected (test_framework=[]), test_spec_files=0",
+    "C": "has_lint_config=False; ci_runs_lint=False; lint_ci_enforcement=1.00 (no CI config files found (H/I fall back to presence-only signals)); god_files>500=1/112 files; god_files>1000=1; smell_scan_score=70.0 (scanned 106 files/4841 lines; long_lines(>120c)=843 (17.4%); trailing_ws_lines=0 (0.0%); debug_print_lines=0; todo_fixme_lines=0)",
+    "D": "logging_framework=None; error_tracking=None; has_health_endpoint=False; has_metrics=True; typed_language=False; god_files>1000=1/112",
+    "E": "lockfiles_found=['composer.lock']; lockfiles_expected=['composer.lock']; dep_update_tooling='none'; direct_dev_deps=0; direct_runtime_deps=0 [NOTE: live staleness/CVE data not checked — no network access by design]",
+    "F": "readme_loc=210; readme_sections=['install', 'setup', 'run', 'test', 'environment', 'architecture', 'api']; changelog=False; contributing_guide=False; has_dockerfile=False; has_docker_compose=False; has_devcontainer=False; env_example_file=True; env_vars_missing_from_example=0",
+    "H": "ci_present=False (no recognized CI config file found)",
+    "I": "hardcoded_secret_hits=3; env_files_committed=[]; dep_audit_in_ci=False (enforcement_fraction=1.00); input_validation_patterns=[]",
+    "K": "recency_days=0; human_authors=1; conventional_rate_last_200=1.0; tag_count=0; semver_tag_count=0; bot_commit_ratio=0.0",
+    "N": "dimension N is not heuristically implemented in this script (needs domain judgment) — flat placeholder score, do not trust for ranking"
+  },
+  "auto_score_class_detection": {
+    "primary_class": "data_engineering",
+    "suggested_classes": [
+      "data_engineering"
+    ],
+    "class_confidence": {
+      "frontend": 0.0,
+      "backend": 0.0,
+      "ml": 0.0,
+      "ai_research": 0.0,
+      "data_engineering": 1.0,
+      "security": 0.0,
+      "infra": 0.0
+    },
+    "is_monorepo_hint": false,
+    "class_used": "data_engineering",
+    "class_overridden": false,
+    "class_auto_suggested": false,
+    "class_auto_suggestion_reason": ""
+  },
+  "auto_score_raw_signals": {
+    "repo_stats": {
+      "schema_version": "1.0",
+      "repo_path": "<clean-clone>",
+      "repo_name": "baseline-repo",
+      "primary_language": "PHP",
+      "secondary_languages": [
+        "SQL",
+        "JavaScript"
+      ],
+      "loc_by_language": {
+        "PHP": 4235,
+        "SQL": 1156,
+        "JavaScript": 433
+      },
+      "file_count_by_language": {
+        "PHP": 103,
+        "SQL": 2,
+        "JavaScript": 7
+      },
+      "detected_frameworks": [
+        "PHP (Composer)"
+      ],
+      "project_type": "unknown",
+      "total_loc": 5824,
+      "total_source_files": 112,
+      "median_file_size_loc": 22,
+      "p90_file_size_loc": 133,
+      "god_files_over_500_loc": 1,
+      "god_files_over_1000_loc": 1,
+      "top_largest_files": [
+        {
+          "path": "database\\schema.sql",
+          "loc": 1055
+        },
+        {
+          "path": "app\\Config\\entities.php",
+          "loc": 256
+        },
+        {
+          "path": "tests\\leave-authorization.php",
+          "loc": 179
+        },
+        {
+          "path": "tests\\workflow.php",
+          "loc": 163
+        },
+        {
+          "path": "app\\Controllers\\ClientController.php",
+          "loc": 159
+        },
+        {
+          "path": "app\\Services\\AuthService.php",
+          "loc": 153
+        },
+        {
+          "path": "app\\Controllers\\EstimateController.php",
+          "loc": 139
+        },
+        {
+          "path": "app\\Services\\EntityService.php",
+          "loc": 139
+        },
+        {
+          "path": "app\\Services\\ClientAccountService.php",
+          "loc": 138
+        },
+        {
+          "path": "app\\Helpers\\functions.php",
+          "loc": 135
+        }
+      ],
+      "generated_files_excluded": 0,
+      "test_spec_files": 0,
+      "test_fixture_files": 0,
+      "test_source_ratio": "0 tests",
+      "test_spec_sample": [],
+      "test_framework": [],
+      "test_config_files": [],
+      "coverage_tooling": null,
+      "coverage_threshold": null,
+      "package_managers": [
+        "Composer"
+      ],
+      "manifests_found": [
+        "composer.json"
+      ],
+      "lockfiles_found": [
+        "composer.lock"
+      ],
+      "lockfiles_expected": [
+        "composer.lock"
+      ],
+      "direct_runtime_deps": 0,
+      "direct_dev_deps": 0,
+      "total_transitive_deps": 0,
+      "dep_update_tooling": "none",
+      "ci_systems": [],
+      "ci_config_files": [],
+      "ci_runs_tests": false,
+      "ci_runs_lint": false,
+      "ci_runs_typecheck": false,
+      "ci_has_deploy": false,
+      "ci_present": false,
+      "hardcoded_secret_hits": 3,
+      "secret_hit_details": [
+        {
+          "file": "tests\\leave-authorization.php",
+          "line": 82,
+          "snippet": "$password = 'LeaveAuth@12345';"
+        },
+        {
+          "file": "tests\\workflow.php",
+          "line": 47,
+          "snippet": "$staffPassword = 'Workflow@12345';"
+        },
+        {
+          "file": "tests\\workflow.php",
+          "line": 62,
+          "snippet": "$portalEmail=\"acceptance.portal.{$suffix}@rankersmind.local\";$portalPassword='ClientPortal@12345';"
+        }
+      ],
+      "env_files_committed": [],
+      "dep_audit_in_ci": false,
+      "input_validation_patterns": [],
+      "linters_and_formatters": {},
+      "has_lint_config": false,
+      "readme": "README.md",
+      "readme_loc": 210,
+      "readme_sections": [
+        "install",
+        "setup",
+        "run",
+        "test",
+        "environment",
+        "architecture",
+        "api"
+      ],
+      "changelog": null,
+      "contributing_guide": null,
+      "has_pr_template": false,
+      "has_issue_template": false,
+      "has_dockerfile": false,
+      "has_docker_compose": false,
+      "has_devcontainer": false,
+      "has_nix": false,
+      "env_example_file": ".env.example",
+      "env_vars_referenced_in_source": [],
+      "env_vars_in_example": [
+        "APP_DEBUG",
+        "APP_ENV",
+        "APP_KEY",
+        "APP_NAME",
+        "APP_TIMEZONE",
+        "APP_URL",
+        "DB_DATABASE",
+        "DB_HOST",
+        "DB_PASSWORD",
+        "DB_PORT",
+        "DB_USERNAME",
+        "INITIAL_ADMIN_EMAIL",
+        "INITIAL_ADMIN_NAME",
+        "INITIAL_ADMIN_PASSWORD",
+        "INITIAL_ADMIN_PHONE",
+        "MAIL_ENABLED",
+        "MAIL_ENCRYPTION",
+        "MAIL_FROM_ADDRESS",
+        "MAIL_FROM_NAME",
+        "MAIL_HOST",
+        "MAIL_PASSWORD",
+        "MAIL_PORT",
+        "MAIL_USERNAME",
+        "REMINDER_CRON_KEY",
+        "SESSION_LIFETIME",
+        "SESSION_SECURE",
+        "UPLOAD_MAX_MB"
+      ],
+      "env_vars_missing_from_example": [],
+      "logging_framework": null,
+      "error_tracking": null,
+      "has_health_endpoint": false,
+      "has_metrics": true,
+      "class_signals": {
+        "dep_keyword_hits": {
+          "ml_libs": [],
+          "experiment_tracking": [],
+          "data_eng": [],
+          "security_libs": [],
+          "backend_frameworks": [],
+          "frontend_frameworks": [],
+          "orm_db": [],
+          "infra_libs": []
+        },
+        "notebook_count": 0,
+        "terraform_file_count": 0,
+        "terraform_present": false,
+        "k8s_manifest_count": 0,
+        "helm_present": false,
+        "pulumi_present": false,
+        "ansible_present": false,
+        "dockerfile_count": 0,
+        "ui_component_file_count": 0,
+        "sql_file_count": 2,
+        "sql_loc": 1156,
+        "css_loc": 0,
+        "css_loc_ratio": 0.0,
+        "data_file_count": 0
+      }
+    },
+    "git_stats": {
+      "schema_version": "3.0",
+      "repo_path": "<clean-clone>",
+      "repo_stats": {
+        "head_sha": "ccc457f4a1dbe156c4e117ae33fd9fbe5cf0c325",
+        "total_commits": 1,
+        "first_commit": "2026-09-28T13:57:53+05:30",
+        "last_commit": "2026-09-28T13:57:53+05:30",
+        "span_days": 0,
+        "recency_days": 0,
+        "human_authors": 1,
+        "bot_authors": 0,
+        "bot_commit_count": 0,
+        "bot_commit_ratio": 0.0,
+        "conventional_rate_last_200": 1.0,
+        "tag_count": 0,
+        "semver_tag_count": 0,
+        "latest_tag": null,
+        "top_authors": [
+          {
+            "name": "ExperCodeVaibhav",
+            "email": "vaibhavsri2004@gmail.com",
+            "commits": 1,
+            "is_bot": false
+          }
+        ]
+      },
+      "analyzed_commits": 1,
+      "class_a_count": 0,
+      "class_b_count": 0,
+      "class_c_pre_count": 0,
+      "confirmed_candidate_count": 0,
+      "provisional_candidate_count": 0,
+      "class_a_commits": [],
+      "class_b_commits": [],
+      "class_c_pre_commits": [],
+      "all_recent_commits": [
+        {
+          "sha": "ccc457f",
+          "full_sha": "ccc457f4a1dbe156c4e117ae33fd9fbe5cf0c325",
+          "subject": "chore: import existing Rankers Mind CRM application",
+          "author_name": "ExperCodeVaibhav",
+          "date": "2026-09-28T13:57:53+05:30",
+          "files_changed": 137,
+          "additions": 7918,
+          "deletions": 0,
+          "qualifies": false,
+          "klass": null,
+          "latent_tasks": 0,
+          "confidence": 1,
+          "small_enough": false,
+          "focused": false,
+          "has_tests": true,
+          "has_impl": true,
+          "has_schema": true,
+          "is_bot": false,
+          "is_noise_subject": true,
+          "is_feature_subject": false,
+          "diversity": 8,
+          "test_file_count": 10,
+          "impl_file_count": 126
+        }
+      ]
+    }
+  },
+  "auto_score_methodology": "Fully deterministic: repo_stats.py + git_stats.py + classify_repo.py (unmodified original skill scripts, static file-tree + git-log analysis only, no network) feed fixed heuristic formulas (see auto_score.py judge_* functions) that replace the LLM-judgment step, then score.py's unmodified weighted-average math produces the final score. No LLM, no model API call, no code execution of the target repo, anywhere in this pipeline."
+}

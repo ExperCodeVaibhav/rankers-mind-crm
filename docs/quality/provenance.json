@@ -1,0 +1,19 @@
+{
+  "scorer_archive": "auto-repo-score.zip",
+  "archive_sha256": "825e14a3bce1746fcfbe8daf0b03c892afaba2066ee3a5bdd8f8f684cc835481",
+  "scripts_unmodified": true,
+  "scripts_sha256": {
+    "auto_score.py": "8d0f9d561e6d429075d1efba769057286e74bcd124189826ea27fde297c179ad",
+    "batch_score.py": "f99ade726e3183c703b3d8b20b8a5440487def06ecb8a809275c9c83b9b5c966",
+    "classify_repo.py": "befb03b425258eb0b6e659784db6bbdf18daa4dbd3c0e6a368b8e7aa0b45e6ab",
+    "git_stats.py": "1445dc3bc385a2c05a664f59e319ec72d17692219cb7fdd70a928926f4d836f2",
+    "repo_stats.py": "1343b1c442e4bf6195b5afc92375caabe0ff19ffb0059f5d99a7328be3fba72b",
+    "score.py": "baa2e4bae815322ef655d8498003ed8fd15dedda0f59ffbaaa3ac7db4d385fac",
+    "sealing.py": "672ea23c6c1c2b9e1724a9ed99c1881dec56c387907ddd0a4426dc9a7dc9e765"
+  },
+  "baseline_commit": "ccc457f",
+  "evaluated_commit": "f185e86",
+  "report_paths_normalized": true,
+  "execution_platform": "Windows; Python 3.14; PYTHONUTF8=1",
+  "ci_url": "https://github.com/ExperCodeVaibhav/rankers-mind-crm/actions/runs/36398921437"
+}
