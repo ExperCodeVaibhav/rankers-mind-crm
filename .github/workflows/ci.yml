@@ -1,0 +1,94 @@
+name: Quality checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: quality-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    name: PHP ${{ matrix.php }} lint, typecheck and tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['8.0', '8.3', '8.4']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: curl, dom, fileinfo, gd, mbstring, openssl, pdo_mysql
+          tools: composer:v2
+          coverage: none
+      - run: composer validate --strict
+      - run: composer install --no-interaction --prefer-dist --no-progress
+      - name: Lint PHP syntax and correctness
+        run: composer lint
+      - name: Typecheck application with PHPStan
+        run: composer typecheck
+      - name: Run PHPUnit tests
+        run: composer test
+      - name: Audit locked dependencies
+        run: composer audit --locked
+
+  secrets:
+    name: Scan Git history for secrets
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Gitleaks scan
+        run: >-
+          docker run --rm -v "$PWD:/repo"
+          zricethezav/gitleaks:v8.30.1 git /repo --redact --no-banner
+
+  integration:
+    name: Apache and MariaDB integration
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      APP_ENV: testing
+      APP_URL: http://localhost:8080
+      DB_DATABASE: rankers_mind_crm_test
+      INITIAL_ADMIN_EMAIL: ci-admin@example.test
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generate disposable credentials
+        run: |
+          for key in APP_KEY DB_PASSWORD INITIAL_ADMIN_PASSWORD; do
+            value=$(openssl rand -hex 32)
+            echo "::add-mask::$value"
+            echo "$key=$value" >> "$GITHUB_ENV"
+          done
+      - name: Build and start isolated application
+        run: docker compose up --build -d --wait --wait-timeout 120
+      - name: Install schema and administrator
+        run: docker compose exec -T --user www-data app php install.php
+      - name: Test HTTP, CSRF, authentication and protected files
+        run: docker compose exec -T -e APP_URL=http://127.0.0.1 app php tests/http-smoke.php
+      - name: Test leave ownership and approval boundaries
+        run: docker compose exec -T -e APP_URL=http://127.0.0.1 --user www-data app php tests/leave-authorization.php
+      - name: Verify database outage returns unavailable
+        run: |
+          docker compose stop db
+          status=$(curl --max-time 10 -s -o /tmp/health.json -w '%{http_code}' http://localhost:8080/health)
+          test "$status" = "503"
+          test "$(cat /tmp/health.json)" = '{"status":"unavailable"}'
+      - name: Show container logs on failure
+        if: failure()
+        run: docker compose logs --no-color --tail=80 app
+      - name: Remove disposable containers and volumes
+        if: always()
+        run: docker compose down --volumes
