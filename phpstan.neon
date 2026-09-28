@@ -1,0 +1,15 @@
+parameters:
+    level: 1
+    excludePaths:
+        analyse:
+            - app/Views
+    paths:
+        - app
+        - routes
+        - cron
+        - install.php
+    scanFiles:
+        - app/Helpers/functions.php
+    bootstrapFiles:
+        - tools/analysis-bootstrap.php
+    tmpDir: storage/cache/phpstan

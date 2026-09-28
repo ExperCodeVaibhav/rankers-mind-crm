@@ -5,8 +5,19 @@
   "license": "proprietary",
   "require": {
     "php": ">=8.0",
-    "dompdf/dompdf": "^2.0 || ^3.0",
+    "dompdf/dompdf": "^3.1.6",
     "phpmailer/phpmailer": "^6.9"
+  },
+  "require-dev": {
+    "phpstan/phpstan": "^2.1",
+    "phpunit/phpunit": "^9.6",
+    "squizlabs/php_codesniffer": "^3.13"
+  },
+  "scripts": {
+    "lint": ["@php tools/lint.php", "phpcs"],
+    "typecheck": "phpstan analyse --memory-limit=512M",
+    "test": "phpunit",
+    "check": ["@lint", "@typecheck", "@test"]
   },
   "autoload": {
     "psr-4": {

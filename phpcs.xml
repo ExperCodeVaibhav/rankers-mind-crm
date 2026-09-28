@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<ruleset name="CRM correctness">
+    <description>Incremental correctness checks for the existing PHP application.</description>
+    <arg name="extensions" value="php"/>
+    <arg name="colors"/>
+    <file>app</file>
+    <file>routes</file>
+    <file>cron</file>
+    <file>public/index.php</file>
+    <file>install.php</file>
+    <file>tests/Unit</file>
+    <file>tools/lint.php</file>
+    <rule ref="Generic.PHP.Syntax"/>
+    <rule ref="Generic.PHP.LowerCaseConstant"/>
+    <rule ref="Generic.PHP.LowerCaseKeyword"/>
+    <rule ref="Squiz.PHP.NonExecutableCode"/>
+</ruleset>

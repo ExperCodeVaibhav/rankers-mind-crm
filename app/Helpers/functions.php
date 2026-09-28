@@ -37,7 +37,7 @@ function asset(string $path): string
     return url('assets/' . ltrim($path, '/'));
 }
 
-function redirect(string $path): never
+function redirect(string $path): void
 {
     header('Location: ' . (str_starts_with($path, 'http') ? $path : url($path)));
     exit;
@@ -146,7 +146,7 @@ function status_class(string $status): string
     return 'info';
 }
 
-function json_response(array $payload, int $status = 200): never
+function json_response(array $payload, int $status = 200): void
 {
     http_response_code($status);
     header('Content-Type: application/json; charset=utf-8');

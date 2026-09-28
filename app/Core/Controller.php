@@ -11,12 +11,12 @@ abstract class Controller
         view($view, $data);
     }
 
-    protected function redirect(string $path): never
+    protected function redirect(string $path): void
     {
         redirect($path);
     }
 
-    protected function json(array $data, int $status = 200): never
+    protected function json(array $data, int $status = 200): void
     {
         http_response_code($status);
         header('Content-Type: application/json; charset=utf-8');
