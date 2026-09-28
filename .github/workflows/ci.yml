@@ -23,7 +23,7 @@ jobs:
       matrix:
         php: ['8.0', '8.3', '8.4']
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
@@ -46,7 +46,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
       - name: Gitleaks scan
@@ -64,7 +64,7 @@ jobs:
       DB_DATABASE: rankers_mind_crm_test
       INITIAL_ADMIN_EMAIL: ci-admin@example.test
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Generate disposable credentials
         run: |
           for key in APP_KEY DB_PASSWORD INITIAL_ADMIN_PASSWORD; do
