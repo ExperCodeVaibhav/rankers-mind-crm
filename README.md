@@ -1,8 +1,37 @@
 # Rankers Mind CRM
 
+[![Quality checks](https://github.com/ExperCodeVaibhav/rankers-mind-crm/actions/workflows/ci.yml/badge.svg)](https://github.com/ExperCodeVaibhav/rankers-mind-crm/actions/workflows/ci.yml)
+
 A database-driven CRM for Rankers Mind covering sales, follow-ups, clients, projects, tasks, staff, photo/geolocation attendance, leave, payroll, invoicing, support tickets, notifications, portals, reports, audit logs and administration.
 
 The project uses a custom PHP MVC architecture, PDO prepared statements and MariaDB/MySQL. It does not require Node.js or a JavaScript build step.
+
+Start with [architecture](docs/architecture.md), [testing](docs/testing.md),
+[contributing](CONTRIBUTING.md), [security](SECURITY.md) and [change history](CHANGELOG.md).
+The source remains proprietary as declared in `composer.json`; publication does not change its license.
+
+## Docker setup
+
+Docker Engine and Docker Compose v2 can run Apache/PHP and MariaDB together.
+Copy `.env.example` to `.env.docker` and set unique `APP_KEY`, `DB_PASSWORD`,
+`INITIAL_ADMIN_EMAIL` and `INITIAL_ADMIN_PASSWORD` values. Set
+`APP_URL=http://localhost:8080`; the initial password must have at least 12 characters.
+
+```sh
+docker compose --env-file .env.docker up --build -d --wait
+docker compose --env-file .env.docker exec --user www-data app php install.php
+```
+
+Open `http://localhost:8080`. Named volumes preserve the database and private files.
+`docker compose --env-file .env.docker down` stops the stack without deleting them.
+The database has no published port. Apache serves only `public/` and the app binds
+to loopback for local use. A production reverse proxy must provide HTTPS; configure
+`APP_URL` and `SESSION_SECURE=true` accordingly. Installation/migrations remain an
+explicit command so container restarts do not change the database unexpectedly.
+
+`GET /health` returns HTTP 200 with `{"status":"ok"}` when the database responds,
+or 503 with `{"status":"unavailable"}`. It does not expose credentials or errors.
+This tests connectivity, not schema installation or every business workflow.
 
 ## Runtime requirements
 
@@ -15,15 +44,15 @@ The project uses a custom PHP MVC architecture, PDO prepared statements and Mari
 
 Runtime libraries include Bootstrap 5.3.8 (self-hosted), Dompdf, PHPMailer, Chart.js, FullCalendar, Font Awesome and Inter.
 
-## Installed local instance
+## XAMPP local instance
 
-This workspace is already linked into XAMPP at:
+Place the checkout, or create your local directory link, at:
 
 ```text
 C:\xampp\htdocs\rankers-mind-crm
 ```
 
-The database is installed as `rankers_mind_crm`, Composer packages are installed and the live application is available at:
+After following the installation steps below, the application is available at:
 
 ```text
 http://localhost/rankers-mind-crm/public/
@@ -176,7 +205,28 @@ Always test a restore on a separate database before relying on a backup. Keep of
 
 ## Automated verification
 
-Run application syntax, security/role smoke checks and the transactional acceptance workflow:
+Install development dependencies and run checks that need no database or `.env`:
+
+```sh
+php tools/composer.phar install
+php tools/composer.phar check
+php tools/composer.phar audit --locked
+```
+
+These commands enforce PHP syntax, PHP_CodeSniffer correctness rules, PHPStan level 1
+on application logic, and PHPUnit regression tests (validation, environment handling,
+routing, health checks and PDF rendering). Templates are syntax-checked but excluded
+from PHPStan because their variables are injected by the view renderer.
+
+GitHub Actions runs the checks on PHP 8.0, 8.3 and 8.4, scans Git history with Gitleaks,
+and builds a disposable Apache/MariaDB stack for HTTP and leave-authorization checks.
+PHP 8.0 is checked for compatibility; use a supported PHP release for deployment.
+
+The older acceptance scripts below require a **disposable database ending in `_test`**
+and `APP_ENV=testing` in the process environment. They must never target a live CRM.
+Except for `leave-authorization.php`, they also require the former demo fixture data,
+which the current production installer deliberately does not create. See
+[testing details](docs/testing.md) before running them.
 
 ```powershell
 $files = rg --files app routes public tests database -g '*.php'
