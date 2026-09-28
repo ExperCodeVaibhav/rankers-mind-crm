@@ -1,0 +1,17 @@
+{
+  "name": "Rankers Mind CRM",
+  "short_name": "Rankers Mind",
+  "description": "Rankers Mind CRM workspace",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#101936",
+  "theme_color": "#101936",
+  "icons": [
+    {
+      "src": "assets/images/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+DirectoryIndex index.php
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# The application is intentionally served from /public. Keep source, secrets,
+# vendor code, database scripts and private storage unreachable over HTTP.
+RewriteCond %{REQUEST_URI} ^(.*/)$
+RewriteRule ^$ %1public/ [R=302,L,NE]
+RewriteRule ^(?!public(?:/|$)) - [F,L]
+</IfModule>
+
+<FilesMatch "(^\.|\.(env|ini|log|sql|md|json|lock|phar)$)">
+    Require all denied
+</FilesMatch>

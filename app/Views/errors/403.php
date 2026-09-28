@@ -1,0 +1,1 @@
+<div class="error-page"><span class="error-code">403</span><h1>Access denied</h1><p>Your role does not have permission to access this area. The restriction is enforced on the server.</p><a class="button button-primary" href="<?= url('dashboard') ?>">Return to dashboard</a></div>

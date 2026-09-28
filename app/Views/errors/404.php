@@ -1,0 +1,1 @@
+<div class="error-page"><span class="error-code">404</span><h1>Page not found</h1><p>The record may have been removed, or the address is incorrect.</p><a class="button button-primary" href="<?= url(auth()?'dashboard':'login') ?>">Go back</a></div>

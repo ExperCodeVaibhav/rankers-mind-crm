@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">Rankers Mind</title>
+  <defs>
+    <linearGradient id="background" x1="8" y1="6" x2="56" y2="60" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#111b43"/>
+      <stop offset="1" stop-color="#087f9e"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="15" fill="url(#background)"/>
+  <path d="M9 49V17h15.5c8.2 0 13 4.1 13 11 0 5-2.8 8.5-7.7 10l9.2 11h-8.8l-8-9.7H16.6V49H9Zm7.6-16h7.2c4 0 6.1-1.6 6.1-4.8 0-3.1-2.1-4.7-6.1-4.7h-7.2V33Z" fill="#fff"/>
+  <path d="M37 49V20l8.8 15.6L55 20v29" fill="none" stroke="#41d6ee" stroke-width="6.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M8 54h48" stroke="#fff" stroke-opacity=".45" stroke-width="2" stroke-linecap="round"/>
+</svg>
