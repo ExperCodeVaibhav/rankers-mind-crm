@@ -1,0 +1,12 @@
+.git
+.env
+.env.*
+.agents
+.codex
+vendor
+storage
+dist
+coverage
+.phpunit.result.cache
+public/uploads
+tools/composer.phar

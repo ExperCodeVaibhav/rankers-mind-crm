@@ -1,0 +1,47 @@
+services:
+  app:
+    build: .
+    ports:
+      - "127.0.0.1:8080:80"
+    environment:
+      APP_ENV: ${APP_ENV:-production}
+      APP_DEBUG: "false"
+      APP_URL: ${APP_URL:-http://localhost:8080}
+      APP_KEY: ${APP_KEY:?Set a random APP_KEY in your environment file}
+      SESSION_SECURE: ${SESSION_SECURE:-false}
+      DB_HOST: db
+      DB_PORT: "3306"
+      DB_DATABASE: ${DB_DATABASE:-rankers_mind_crm}
+      DB_USERNAME: crm
+      DB_PASSWORD: ${DB_PASSWORD:?Set a database password in your environment file}
+      INITIAL_ADMIN_NAME: ${INITIAL_ADMIN_NAME:-Administrator}
+      INITIAL_ADMIN_EMAIL: ${INITIAL_ADMIN_EMAIL:?Set the initial admin email}
+      INITIAL_ADMIN_PASSWORD: ${INITIAL_ADMIN_PASSWORD:?Set a unique initial admin password}
+    volumes:
+      - app-storage:/var/www/html/storage
+      - public-uploads:/var/www/html/public/uploads
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  db:
+    image: mariadb:10.11
+    environment:
+      MARIADB_DATABASE: ${DB_DATABASE:-rankers_mind_crm}
+      MARIADB_USER: crm
+      MARIADB_PASSWORD: ${DB_PASSWORD:?Set a database password in your environment file}
+      MARIADB_RANDOM_ROOT_PASSWORD: "1"
+    volumes:
+      - database:/var/lib/mysql
+    healthcheck:
+      test: [CMD, healthcheck.sh, --connect, --innodb_initialized]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    restart: unless-stopped
+
+volumes:
+  database:
+  app-storage:
+  public-uploads:
